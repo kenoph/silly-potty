@@ -105,13 +105,13 @@ def load_adesioni(legislatura):
 
 
 def download():
-    # legislatura = load_legislatura()
-    legislatura = {
-        "legislatura": u'http://dati.camera.it/ocd/legislatura.rdf/repubblica_17'
-    }
+    legislatura = load_legislatura()
+    # legislatura = {
+    #     "legislatura": u'http://dati.camera.it/ocd/legislatura.rdf/repubblica_17'
+    # }
     json.dump(load_deputati(legislatura["legislatura"]), open("data/camera/deputati.json", "wb"))
-    # json.dump(load_gruppi(legislatura["legislatura"]), open("data/camera/gruppi.json", "wb"))
-    # json.dump(load_adesioni(legislatura["legislatura"]), open("data/camera/adesioni.json", "wb"))
+    json.dump(load_gruppi(legislatura["legislatura"]), open("data/camera/gruppi.json", "wb"))
+    json.dump(load_adesioni(legislatura["legislatura"]), open("data/camera/adesioni.json", "wb"))
 
 if __name__ == "__main__":
     download()
