@@ -12,9 +12,11 @@ Per visualizzare il grafico riguardante i cambi di partito dei vari deputati,
 basta mettere i file contenuti in `www/` in un webserver.
 
 Esempio:
-  cd path/www
-  python -m SimpleHTTPServer 8080
-  # aprire un browser all'indirizzo http://localhost:8080/camera.html
+```sh
+cd path/www
+python -m SimpleHTTPServer 8080
+# aprire un browser all'indirizzo http://localhost:8080/camera.html
+```
 
 ![camera.html](/docs/camera.png)
 
