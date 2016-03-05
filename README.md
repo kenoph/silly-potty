@@ -11,6 +11,9 @@ Il file [camera.py](camera.py) scarica i dati necessari e li salva in `www/data/
 Per visualizzare il grafico riguardante i cambi di partito dei vari deputati,
 basta mettere i file contenuti in `www/` in un webserver.
 
+**NOTA:** È fortemente consigliato l'utilizzo di Google Chrome per visualizzare le pagine,
+          in quanto le animazioni in Mozilla Firefox risultano troppo lente.
+
 Esempio:
 ```sh
 cd path/www
