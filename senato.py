@@ -1,60 +1,52 @@
 #!/usr/bin/env python
 
 import json
+import time
 
 from lib import SimpleWrapper
 
 sparql = SimpleWrapper("http://dati.senato.it/sparql")
 
 
-def load_partiti():
+def load_load_gruppo():
     results = sparql.query("""
-    SELECT DISTINCT ?gruppo ?nome ?maxFine
+    SELECT DISTINCT ?gruppo ?nome ?maxInizio ?descrizione
     WHERE
     {
-        ?gruppo a ocd:gruppoParlamentare.
         ?gruppo osr:denominazione ?denominazione.
-        ?denominazione osr:titolo ?nome.
+        ?denominazione osr:titoloBreve ?nome.
+        ?denominazione osr:titolo ?descrizione.
+        ?denominazione osr:inizio ?maxInizio.
         {
-            SELECT (MAX(?fine) AS ?maxFine)
+            SELECT ?gruppo (MAX(?subInizio) AS ?maxInizio)
             WHERE
             {
-                ?denominazione osr:fine ?fine.
+                ?gruppo a ocd:gruppoParlamentare.
+                ?gruppo osr:denominazione ?denominazione.
+                ?denominazione osr:inizio ?subInizio.
             }
             GROUP BY ?gruppo
         }
-        ?denominazione osr:fine ?currFine.
-        #?denominazione osr:fine ?maxFine.
-        #FILTER (?currFine = ?maxFine)
     }
-    LIMIT 10
+    ORDER BY ?gruppo
     """)
 
-    print json.dumps(results, indent=2)
-    exit()
-
-    partiti_dict = dict()
-    for result in results:
-        partiti_dict.setdefault(result['gruppo'], list()).append(result['nomeGruppo'])
-
-    partiti = list()
-    for k, v in partiti_dict.iteritems():
-        partiti.append({
-            "partito": k,
-            "nomi": v
-        });
-
-    return partiti
+    return results
 
 
 def load_senatori():
     results = sparql.query("""
-    SELECT DISTINCT *
+    SELECT DISTINCT ?senatore ?nome ?cognome
     WHERE
     {
-        ?senatore rdf:type <http://dati.senato.it/osr/Senatore>.
+        ?senatore rdf:type osr:Senatore.
         ?senatore foaf:firstName ?nome.
         ?senatore foaf:lastName ?cognome.
+        OPTIONAL
+        {
+            ?senatore bio:death ?morte.
+        }
+        FILTER (!BOUND(?morte)).
     }
     """)
 
@@ -71,14 +63,33 @@ def load_adesioni():
         ?adesione osr:gruppo ?gruppo.
         ?adesione osr:inizio ?inizio.
         ?adesione osr:fine ?fine.
+        OPTIONAL
+        {
+            ?senatore bio:death ?morte.
+        }
+        FILTER (!BOUND(?morte)).
     }
     ORDER BY ?senatore ?inizio
     """)
 
-    return results
+    rr = list()
+    lastSenatore = ""
+    lastGruppo = ""
+    for result in results:
+        if result["senatore"] == lastSenatore and result["gruppo"] == lastGruppo:
+            continue
+
+        lastSenatore = result["senatore"]
+        lastGruppo = result["gruppo"]
+
+        rr.append(result)
+
+    return rr
 
 
 if __name__ == "__main__":
-    # json.dump(load_senatori(), open("data/senato/senatori.json", "wb"))
-    # json.dump(load_adesioni(), open("data/senato/adesioni.json", "wb"))
-    json.dump(load_partiti(),  open("data/senato/partiti.json",  "wb"))
+    json.dump(load_senatori(), open("data/senato/senatori.json", "wb"))
+    json.dump(load_adesioni(), open("data/senato/adesioni.json", "wb"))
+    json.dump(load_load_gruppo(), open("data/senato/gruppi.json", "wb"))
+
+#TODO: Capire cosa sono i senatori che non sono collegati a nulla :/

@@ -1,3 +1,6 @@
+import datetime
+import json
+import time
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
@@ -8,10 +11,25 @@ __all__ = [
 
 
 DEFAULT_PREFIXES = {
+    "bio": "http://purl.org/vocab/bio/0.1/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
     "ocd": "http://dati.camera.it/ocd/",
     "osr": "http://dati.senato.it/osr/",
-    "bio": "http://purl.org/vocab/bio/0.1/"
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
 }
+
+
+def serialize_date(d):
+    return int(time.mktime(d.timetuple()) * 1000 + d.microsecond)
+
+
+def parse_date(s):
+    return serialize_date(datetime.datetime.strptime(s, "%Y%m%d"))
+
+
+def pretty_print(data):
+    print json.dumps(data, indent=2)
 
 
 def create_prefix(short_name, url):
@@ -42,6 +60,16 @@ class SimpleWrapper:
         self.endpoint = endpoint
         self.sparql = SPARQLWrapper(endpoint)
         self.sparql.setReturnFormat(JSON)
+
+    def dir(self, elem):
+        pretty_print(self.query("""
+        SELECT DISTINCT ?t
+        WHERE
+        {
+          ?gruppo a %(elem)s.
+          ?gruppo ?t [].
+        }
+        """ % {"elem": elem}))
 
     def query(self, q, prefixes=DEFAULT_PREFIXES):
         q = create_query(q, prefixes)

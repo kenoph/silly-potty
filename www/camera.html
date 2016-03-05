@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camera</title>
+
+    <script src="js/d3.js"></script>
+    <script src="js/jsnetworkx.js"></script>
+    <script src="js/d3.queue.v2.min.js"></script>
+</head>
+<body>
+<style>
+    html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    body {
+        background-color: #FFF;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #graph {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #graph text {
+        font-family: "Courier New", courier, monospace;
+        font-size: 0.7em;
+        font-weight: bold;
+    }
+    div.tooltip {
+        position: absolute;
+        text-align: left;
+        padding: 4px;
+        font: 12px sans-serif;
+        background: rgba(70, 255, 70, 0.8);
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+</style>
+
+<svg id="graph"></svg>
+
+<script>
+    //TODO: CONSIDERA NUMERO DI VOLTE CHE TORNA AL VECCHIO PARTITO
+
+    var COLOR_DEPUTATO = "#0E7FFF";
+    var COLOR_DEPUTATO_SELECTED = "#FF2000";
+    var COLOR_EDGE = '#999';
+    var COLOR_GRUPPO = "#FF7F0E";
+    var COLOR_TEXT = "black";
+
+    // Create tooltip's hidden DIV
+    var div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+
+    // Renaming, just because I like it
+    d3.queue = d3_queue.queue;
+
+    // Create the jsNetworkX graph
+    var G = new jsnx.DiGraph();
+
+    // Request all json files together
+    d3.queue()
+            .defer(d3.json, "data/camera/deputati.json")
+            .defer(d3.json, "data/camera/gruppi.json" )
+            .defer(d3.json, "data/camera/adesioni.json").awaitAll(function (err, files) {
+
+        var deputati = files[0];
+        var gruppi  = files[1];
+        var adesioni = files[2];
+
+        deputati.forEach(function (deputato) {
+            G.addNode(deputato.deputato, {
+                color: COLOR_DEPUTATO,
+                obj: deputato,
+                label: function () {
+                    return G.outEdges(deputato.deputato).length;
+                },
+                r: function () {
+                    var partiti = G.outEdges(deputato.deputato).length;
+                    return partiti * 3;
+                }
+            });
+        });
+
+        gruppi.forEach(function (gruppo) {
+            // Tieni solo il nome abbreviato (dentro le prime 2 parentesi)
+            var nomeAbbr = gruppo.nome.match(/ *\([^)]*\) */g)[0];
+            nomeAbbr = nomeAbbr.slice(2, nomeAbbr.length - 2);
+
+            G.addNode(gruppo.gruppo, {
+                color: COLOR_GRUPPO,
+                label: function () {
+                    return nomeAbbr;
+                },
+                obj: gruppo,
+                r: function () {
+                    return G.inEdges(gruppo.gruppo).length / 7.0 + 10;
+                }
+            });
+        });
+
+        adesioni.forEach(function (adesione) {
+            G.addEdge(adesione.deputato, adesione.gruppo);
+        });
+
+        deputati.forEach(function (deputato) {
+            if (G.outEdges(deputato.deputato).length <= 1) {
+                G.removeNode(deputato.deputato);
+            }
+        });
+
+        draw();
+
+        d3.selectAll("#graph .node")
+        .on("mouseover", function (d, i) {
+            if (d.data.obj.deputato === undefined)
+                return;
+            var deputato = d.data.obj;
+
+            var partiti =  G.outEdges(deputato.deputato).length;
+
+            d3.select(this).select("circle").style("fill", COLOR_DEPUTATO_SELECTED);
+            div.transition()
+                    .duration(100)
+                    .style("opacity", .9);
+            div.html("<b>" + deputato.nome + " " + deputato.cognome + "</b><br />" + partiti + " gruppi parlamentari")
+                    .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+
+            d3.selectAll("#graph .edge .line").each(function (d) {
+                if (deputato.deputato === d.edge[0] || deputato.deputato === d.edge[1]) {
+                    d3.select(this)
+                            .style("fill", COLOR_DEPUTATO_SELECTED)
+                            .style("stroke-width", "2px")
+                            .style("stroke", COLOR_DEPUTATO_SELECTED);
+                }
+            });
+        })
+        .on("mouseout", function(d) {
+            if (d.data.obj.deputato === undefined)
+                return;
+            var deputato = d.data.obj;
+
+            d3.select(this).select("circle").style("fill", COLOR_DEPUTATO);
+            div.transition()
+                    .duration(100)
+                    .style("opacity", 0);
+
+            d3.selectAll("#graph .edge .line").each(function (d) {
+                if (deputato.deputato === d.edge[0] || deputato.deputato === d.edge[1]) {
+                    d3.select(this)
+                            .style("fill", COLOR_EDGE)
+                            .style("stroke-width", "0px")
+                            .style("stroke", COLOR_EDGE);
+                }
+            });
+        });
+    });
+
+    function draw() {
+        jsnx.draw(G, {
+            element: '#graph',
+            labels: function (d) {
+                return d.data.label();
+            },
+            withLabels: true,
+            nodeAttr: {
+                r: function (d) {
+                    return d.data.r();
+                }
+            },
+            nodeStyle: {
+                fill: function(d) {
+                    return d.data.color;
+                },
+                stroke: function(d) {
+                    return d.data.stroke || "#FFF";
+                },
+                "stroke-width": function(d) {
+                    return d.data["stroke-width"] || 1;
+                }
+            },
+            edgeStyle: {
+                fill: COLOR_EDGE
+            }
+        });
+
+        d3.selectAll("#graph text").style("fill", COLOR_TEXT);
+    }
+</script>
+</body>
+</html>
