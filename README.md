@@ -1,4 +1,4 @@
-# VizLamento
+# Viz Lamento
 
 Ovvero, esperimenti di Data Visualization con gli Open Data del Parlamento Italiano.
 
