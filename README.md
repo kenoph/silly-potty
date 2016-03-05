@@ -16,6 +16,8 @@ Esempio:
   python -m SimpleHTTPServer 8080
   # aprire un browser all'indirizzo http://localhost:8080/camera.html
 
+![camera.html](/docs/camera.png)
+
 # Licenza
 
 Questo repository è coperto da licenza MIT, il cui testo è disponibile nel file [LICENSE](LICENSE)
