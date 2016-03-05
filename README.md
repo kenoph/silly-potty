@@ -13,6 +13,9 @@ basta mettere i file contenuti in `www/` in un webserver.
 
 **NOTA:** È fortemente consigliato l'utilizzo di Google Chrome per visualizzare le pagine,
           in quanto le animazioni in Mozilla Firefox risultano troppo lente.
+          
+**NOTA2:** Tempo permettendo, la visualizzazione sarà migrata da jsnetworkx a puro d3.js
+           (o a dagre.js dove opportuno).
 
 Esempio:
 ```sh
