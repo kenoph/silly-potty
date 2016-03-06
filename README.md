@@ -27,6 +27,7 @@ python -m SimpleHTTPServer 8080
 ```
 
 [![Camera](img/camera.png)](http://kenoph.github.io/silly-potty/www/camera.html)
+
 [Clica per aprire la visualizzazione](http://kenoph.github.io/silly-potty/www/camera.html)
 
 # Autore
