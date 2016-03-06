@@ -1,0 +1,224 @@
+[
+  {
+    "gruppo": "http://dati.senato.it/gruppo/2",
+    "maxInizio": "1994-04-15",
+    "descrizione": "Partito Popolare Italiano",
+    "nome": "PPI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/26",
+    "maxInizio": "2006-04-28",
+    "descrizione": "Unione dei Democraticicristiani e di Centro (UDC)",
+    "nome": "UDC"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/3",
+    "maxInizio": "1995-02-01",
+    "descrizione": "Alleanza Nazionale",
+    "nome": "AN"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/30",
+    "maxInizio": "1994-04-15",
+    "descrizione": "Forza Italia",
+    "nome": "FI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/31",
+    "maxInizio": "2005-02-10",
+    "descrizione": "Verdi - l'Unione",
+    "nome": "Verdi-Un"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/33",
+    "maxInizio": "2013-03-15",
+    "descrizione": "Lega Nord e Autonomie",
+    "nome": "LN-Aut"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/36",
+    "maxInizio": "1998-10-14",
+    "descrizione": "Comunista",
+    "nome": "Comunista"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/40",
+    "maxInizio": "1998-02-24",
+    "descrizione": "Democratici di Sinistra - l'Ulivo",
+    "nome": "DS-U"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/42",
+    "maxInizio": "2000-02-17",
+    "descrizione": "Unione Democratici per l' Europa (UDEUR)",
+    "nome": "UDEUR"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/43",
+    "maxInizio": "1996-05-09",
+    "descrizione": "Rinnovamento Italiano",
+    "nome": "Rinnovam. Ital."
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/44",
+    "maxInizio": "1997-10-06",
+    "descrizione": "Rinnovamento Italiano e Indipendenti",
+    "nome": "Rinn. Ital. e Ind."
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/45",
+    "maxInizio": "1999-02-25",
+    "descrizione": "Rinnov. Ital. Liberaldem. Ind.-Pop. per l'Europa",
+    "nome": "Rin.Ld.Ind-Pop."
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/46",
+    "maxInizio": "1999-02-18",
+    "descrizione": "Democrazia Europea",
+    "nome": "Democrazia Europea"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/47",
+    "maxInizio": "2001-06-12",
+    "descrizione": "Margherita - DL - L'Ulivo",
+    "nome": "Mar-DL-U"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/48",
+    "maxInizio": "2001-05-30",
+    "descrizione": "Per le Autonomie",
+    "nome": "Aut"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/49",
+    "maxInizio": "2008-04-29",
+    "descrizione": "Partito Democratico",
+    "nome": "PD"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/50",
+    "maxInizio": "2006-04-28",
+    "descrizione": "Rifondazione Comunista - Sinistra Europea",
+    "nome": "RC-SE"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/51",
+    "maxInizio": "2006-04-28",
+    "descrizione": "Insieme con l'Unione Verdi - Comunisti Italiani",
+    "nome": "IU-Verdi-Com"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/52",
+    "maxInizio": "2006-05-18",
+    "descrizione": "Per le Autonomie",
+    "nome": "Aut"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/53",
+    "maxInizio": "2007-04-12",
+    "descrizione": "D.C. per le autonomie-P. Repubblicano Ital-Mov. per l'Autonomia",
+    "nome": "DCA-PRI-MPA"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/54",
+    "maxInizio": "2007-05-16",
+    "descrizione": "Sinistra Democratica per il Socialismo Europeo",
+    "nome": "SDSE"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/56",
+    "maxInizio": "2013-11-20",
+    "descrizione": "Forza Italia-Il Popolo della Libert\u00e0 XVII Legislatura",
+    "nome": "FI-PdL XVII"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/57",
+    "maxInizio": "2008-04-29",
+    "descrizione": "Italia dei Valori",
+    "nome": "IdV"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/58",
+    "maxInizio": "2011-11-10",
+    "descrizione": "Unione di Centro, SVP e Autonomie (Union Vald\u00f4taine, MAIE, Verso Nord, Movimento Repubblicani Europei, Partito Liberale Italiano, Partito Socialista Italiano)",
+    "nome": "UDC-SVP-AUT:UV-MAIE-VN-MRE-PLI-PSI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/65",
+    "maxInizio": "2010-08-02",
+    "descrizione": "Futuro e Libert\u00e0 per l'Italia",
+    "nome": "FLI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/66",
+    "maxInizio": "2012-02-24",
+    "descrizione": "Coesione Nazionale (Grande Sud-S\u00ec Sindaci-Popolari d'Italia Domani-Il Buongoverno-Fare Italia)",
+    "nome": "CN:GS-SI-PID-IB-FI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/67",
+    "maxInizio": "2012-12-20",
+    "descrizione": "Per il Terzo Polo (ApI-FLI-Centro Democratico)",
+    "nome": "Per il Terzo Polo:ApI-FLI-CD"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/68",
+    "maxInizio": "2012-12-21",
+    "descrizione": "Fratelli d'Italia - Centrodestra Nazionale",
+    "nome": "FDI-CDN"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/69",
+    "maxInizio": "2013-07-10",
+    "descrizione": "Per le Autonomie (SVP-UV-PATT-UPT)-PSI-MAIE",
+    "nome": "Aut (SVP, UV, PATT, UPT)-PSI-MAIE"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/70",
+    "maxInizio": "2013-11-27",
+    "descrizione": "Per l'Italia",
+    "nome": "PI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/71",
+    "maxInizio": "2013-03-15",
+    "descrizione": "Movimento 5 Stelle",
+    "nome": "M5S"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/72",
+    "maxInizio": "2016-02-16",
+    "descrizione": "Grandi Autonomie e Libert\u00e0 (Grande Sud, Popolari per l'Italia, Moderati, Idea, Euro-Exit, M.P.L.-Movimento politico Libertas)",
+    "nome": "GAL (GS, PpI, M, Id, E-E, MPL)"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/73",
+    "maxInizio": "2014-12-11",
+    "descrizione": "Area Popolare (NCD-UDC)",
+    "nome": "AP (NCD-UDC)"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/74",
+    "maxInizio": "2013-12-11",
+    "descrizione": "Scelta Civica per l'Italia",
+    "nome": "SCpI"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/75",
+    "maxInizio": "2015-09-08",
+    "descrizione": "Conservatori e Riformisti",
+    "nome": "CoR"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/76",
+    "maxInizio": "2015-07-29",
+    "descrizione": "Alleanza Liberalpopolare-Autonomie",
+    "nome": "AL-A"
+  },
+  {
+    "gruppo": "http://dati.senato.it/gruppo/9",
+    "maxInizio": "1946-06-25",
+    "descrizione": "Misto",
+    "nome": "Misto"
+  }
+]
