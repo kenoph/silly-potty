@@ -26,9 +26,8 @@ python -m SimpleHTTPServer 8080
 # aprire un browser all'indirizzo http://localhost:8080/camera.html
 ```
 
-![Camera](img/camera.png)
-
-[APRI](http://kenoph.github.io/silly-potty/www/camera.html)
+[![Camera](img/camera.png)](http://kenoph.github.io/silly-potty/www/camera.html)
+[Clica per aprire la visualizzazione](http://kenoph.github.io/silly-potty/www/camera.html)
 
 # Autore
 
