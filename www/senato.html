@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Senato</title>
+
+    <script src="js/d3.js"></script>
+    <script src="js/jsnetworkx.js"></script>
+    <script src="js/d3.queue.v2.min.js"></script>
+</head>
+<body>
+<style>
+    html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    body {
+        background-color: #333;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #graph {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #graph text {
+        paint-order: stroke;
+        stroke: rgba(0, 0, 0, 200);
+        stroke-width: 2px;
+        stroke-linecap: butt;
+        stroke-linejoin: miter;
+
+        font-family: "Courier New", courier, monospace;
+        font-size: 0.7em;
+        font-weight: 700;
+    }
+</style>
+
+<svg id="graph"></svg>
+
+<script>
+    d3.queue = d3_queue.queue;
+
+    var G = new jsnx.DiGraph();
+
+    d3.queue()
+            .defer(d3.json, "/data/senato/senatori.json")
+            .defer(d3.json, "/data/senato/gruppi.json" )
+            .defer(d3.json, "/data/senato/adesioni.json").awaitAll(function (err, files) {
+
+        var senatori = files[0];
+        var gruppi  = files[1];
+        var adesioni = files[2];
+
+        senatori.forEach(function (senatore) {
+            G.addNode(senatore.senatore, {
+                color: "#0E7FFF",
+//                label: senatore.nome + " " + senatore.cognome,
+                obj: senatore,
+                r: function () {
+                    var partiti = G.outEdges(senatore.senatore).length;
+                    return partiti * partiti / 2;
+                }
+            });
+        });
+
+        gruppi.forEach(function (gruppo) {
+            console.log(gruppo.descrizione);
+
+            G.addNode(gruppo.gruppo, {
+                color: "#FF7F0E",
+                label: gruppo.descrizione.replace(/ *\([^)]*\) */g, ""),
+                obj: gruppo,
+                r: function () {
+                    return G.inEdges(gruppo.gruppo).length / 5.0 + 5;
+                }
+            });
+        });
+
+        adesioni.forEach(function (adesione) {
+            G.addEdge(adesione.senatore, adesione.gruppo);
+        });
+
+        senatori.forEach(function (senatore) {
+            if (G.outEdges(senatore.senatore).length <= 3) {
+//            if (G.outEdges(senatore.senatore).length <= 1) {
+                G.removeNode(senatore.senatore);
+            }
+        });
+
+        gruppi.forEach(function (gruppo) {
+            if (G.inEdges(gruppo.gruppo).length == 0) {
+                G.removeNode(gruppo.gruppo);
+            }
+        });
+
+        draw();
+
+        d3.selectAll("#graph circle").on("click", function (d, i) {
+            var data = d.data;
+
+            if (data.obj.senatore) {
+                var senatore = data.obj;
+
+                console.log(senatore.nome + " "  + senatore.cognome + ": " + G.outEdges(senatore.senatore).length);
+            }
+        });
+    });
+
+    function draw() {
+        jsnx.draw(G, {
+            element: '#graph',
+            labels: function (d) {
+                return d.data.label;
+            },
+            withLabels: true,
+            nodeAttr: {
+                r: function (d) {
+                    return d.data.r();
+                }
+            },
+            nodeStyle: {
+                fill: function(d) {
+                    return d.data.color;
+                },
+                stroke: function(d) {
+                    return d.data.stroke || "#FFF";
+                },
+                "stroke-width": function(d) {
+                    return d.data["stroke-width"] || 1;
+                }
+            },
+            edgeStyle: {
+                fill: '#999'
+            }
+        });
+
+        d3.selectAll("#graph text").style("fill", "white");
+    }
+</script>
+</body>
+</html>
