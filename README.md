@@ -1,4 +1,4 @@
-# Viz Lamento
+# Silly Potty
 
 Ovvero, esperimenti di Data Visualization con gli Open Data del Parlamento Italiano.
 
