@@ -28,6 +28,10 @@ python -m SimpleHTTPServer 8080
 
 ![camera.html](/docs/camera.png)
 
+# Autore
+
+Paolo Montesel [(@pmontesel)](https://twitter.com/pmontesel)
+
 # Licenza
 
 Questo repository è coperto da licenza MIT, il cui testo è disponibile nel file [LICENSE](LICENSE)
