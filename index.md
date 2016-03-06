@@ -16,7 +16,7 @@ inlined... lo so, è brutto, ma non volevo perdere tempo a fare le cose per bene
 Si consiglia l'utilizzo di Google Chrome per la visualizzazione dei diagrammi in quanto
 dotato del motore javascript più veloce.
 
-## Deputati e Gruppi Parlamentari
+## Trasformismo in Parlamento
 
 Il primo diagramma mostra i gruppi parlamentari a cui ogni deputato aderisce o a cui ha aderito in passato.
 Per rendere più leggero il grafo, sono visualizzati solo i deputati della legislatura corrente
