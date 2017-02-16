@@ -109,8 +109,13 @@ def download():
     # legislatura = {
     #     "legislatura": u'http://dati.camera.it/ocd/legislatura.rdf/repubblica_17'
     # }
+    # Workaround
+    hack = [{
+        "gruppo": "http://dati.camera.it/ocd/gruppoParlamentare.rdf/gr2670",
+        "nome": "Indipendenti (Indip)",
+    }]
     json.dump(load_deputati(legislatura["legislatura"]), open("data/camera/deputati.json", "wb"))
-    json.dump(load_gruppi(legislatura["legislatura"]), open("data/camera/gruppi.json", "wb"))
+    json.dump(hack + load_gruppi(legislatura["legislatura"]), open("data/camera/gruppi.json", "wb"))
     json.dump(load_adesioni(legislatura["legislatura"]), open("data/camera/adesioni.json", "wb"))
 
 if __name__ == "__main__":

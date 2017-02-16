@@ -2,3 +2,4 @@
 www/data/senato
 *~
 *.iml
+*.pyc
